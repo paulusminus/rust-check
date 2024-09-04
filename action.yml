@@ -1,5 +1,10 @@
 name: "rust-check"
 description: "Check rust project with formatting, clippy and test"
+inputs:
+  build:
+    description: "Optionally build"
+    required: true
+    default: "false"
 runs:
   using: "composite"
   steps:
@@ -18,3 +23,8 @@ runs:
     - name: Cargo test
       run: cargo test --verbose
       shell: bash
+
+    - name: Cargo build
+      run: cargo build --release
+      shell: bash
+      if: ${{ inputs.build }} == "true"
