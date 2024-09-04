@@ -8,13 +8,19 @@ inputs:
 runs:
   using: "composite"
   steps:
+    - name: Show build parameter
+      run: echo "Build is $BUILD"
+      shell: bash
+      env:
+        BUILD: ${{ inputs.build }}
+
     - uses: actions/checkout@v4
 
-    - name: Cargo fmt 
+    - uses: Swatinem/rust-cache@v2
+
+    - name: Cargo fmt
       run: cargo fmt --check
       shell: bash
-
-    - uses: Swatinem/rust-cache@v2
 
     - name: Cargo clippy
       run: cargo clippy -- -D warnings
