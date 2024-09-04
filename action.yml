@@ -33,4 +33,4 @@ runs:
     - name: Cargo build
       run: cargo build --release
       shell: bash
-      if: ${{ inputs.build }} == 'true'
+      if: inputs.build == 'true'
